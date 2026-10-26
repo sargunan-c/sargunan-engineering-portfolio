@@ -14,10 +14,14 @@ const STAGES: { key: keyof Project; label: string }[] = [
 // Static import map so Vite can resolve the screenshot assets at build time.
 import ragScreenshot from '@/assets/images/project-rag-screenshot.png'
 import rfqScreenshot from '@/assets/images/project-rfq-screenshot.png'
+import sensorFaultScreenshot from '@/assets/images/project-sensor-fault-screenshot.png'
+import firmwareValidationScreenshot from '@/assets/images/project-firmware-validation-screenshot.png'
 
 const SCREENSHOT_MAP: Record<string, string> = {
   'project-rag-screenshot.png': ragScreenshot,
   'project-rfq-screenshot.png': rfqScreenshot,
+  'project-sensor-fault-screenshot.png': sensorFaultScreenshot,
+  'project-firmware-validation-screenshot.png': firmwareValidationScreenshot,
 }
 
 export default function ProjectCard({ project }: { project: Project }) {
@@ -50,7 +54,11 @@ export default function ProjectCard({ project }: { project: Project }) {
                 />
               </div>
               <p className="font-mono text-[10px] text-paper-500 mt-2">
-                Actual n8n workflow — {project.name}
+                {project.tags.includes('n8n')
+                  ? `Actual n8n workflow — ${project.name}`
+                  : project.track === 'embedded'
+                  ? `Interactive verification console — ${project.name}`
+                  : `Live console — ${project.name}`}
               </p>
             </>
           ) : (

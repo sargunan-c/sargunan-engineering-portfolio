@@ -10,37 +10,83 @@ export default function Resume() {
           {/* Resume CTA */}
           <div>
             <Reveal>
-              <p className="section-eyebrow mb-4">Resume</p>
+              <p className="section-eyebrow mb-4">Resume & Credentials</p>
             </Reveal>
             <Reveal delay={0.05}>
               <h2 className="text-4xl sm:text-5xl font-display font-semibold tracking-tight mb-5">
-                Applied GenAI Engineer — Resume
+                Targeted Resumes
               </h2>
             </Reveal>
             <Reveal delay={0.1}>
-              <p className="text-paper-300 leading-relaxed mb-8 max-w-sm">
-                A concise overview of my engineering background, AI
-                capabilities, projects and technical experience.
+              <p className="text-paper-300 leading-relaxed mb-8 max-w-md">
+                Two specialized resumes for technical recruiters and engineering managers, aligned with my dual focus in Embedded Firmware & Validation, and Applied AI & Software Systems.
               </p>
             </Reveal>
+
+            {/* Resume Track 1: Embedded / Firmware */}
+            <Reveal delay={0.12}>
+              <div className="glass-panel rounded-2xl p-5 mb-5 border border-cyan/20">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="font-mono text-xs text-cyan uppercase tracking-wide">
+                    Track 1 · Embedded & Firmware
+                  </span>
+                  <span className="font-mono text-[10px] text-paper-500 uppercase">PDF</span>
+                </div>
+                <h3 className="font-display font-semibold text-lg text-paper-100 mb-1">
+                  Embedded Firmware & Validation
+                </h3>
+                <p className="text-xs text-paper-400 mb-4 leading-relaxed">
+                  Modular C11 architecture, finite-state machines, automated regression testing, and black-box verification.
+                </p>
+                <div className="flex flex-wrap gap-2.5">
+                  <MagneticButton href={profile.embeddedResumeUrl} download>
+                    Download Embedded/Firmware Resume
+                  </MagneticButton>
+                  <MagneticButton
+                    variant="secondary"
+                    href={profile.embeddedResumeUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    View PDF
+                  </MagneticButton>
+                </div>
+              </div>
+            </Reveal>
+
+            {/* Resume Track 2: AI / Software */}
             <Reveal delay={0.15}>
-              <div className="flex flex-wrap gap-3">
-                <MagneticButton href={profile.resumeUrl} download>
-                  Download Resume
-                </MagneticButton>
-                <MagneticButton
-                  variant="secondary"
-                  href={profile.resumeUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  View Resume
-                </MagneticButton>
+              <div className="glass-panel rounded-2xl p-5 mb-8 border border-white/10">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="font-mono text-xs text-paper-300 uppercase tracking-wide">
+                    Track 2 · AI & Software
+                  </span>
+                  <span className="font-mono text-[10px] text-paper-500 uppercase">PDF</span>
+                </div>
+                <h3 className="font-display font-semibold text-lg text-paper-100 mb-1">
+                  Applied AI & Software Engineering
+                </h3>
+                <p className="text-xs text-paper-400 mb-4 leading-relaxed">
+                  Practical RAG systems, LLM APIs, vector search, n8n workflow automation, and React/TypeScript web apps.
+                </p>
+                <div className="flex flex-wrap gap-2.5">
+                  <MagneticButton href={profile.aiResumeUrl} download>
+                    Download AI/Software Resume
+                  </MagneticButton>
+                  <MagneticButton
+                    variant="secondary"
+                    href={profile.aiResumeUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    View PDF
+                  </MagneticButton>
+                </div>
               </div>
             </Reveal>
 
             <Reveal delay={0.2}>
-              <div className="mt-12 pt-8 border-t border-ink-600">
+              <div className="mt-8 pt-8 border-t border-ink-600">
                 <p className="font-mono text-[10px] uppercase tracking-wide text-paper-700 mb-4">
                   Certifications
                 </p>
@@ -50,7 +96,7 @@ export default function Resume() {
                       <p className="text-sm font-medium text-paper-100">{cert.name}</p>
                       <p className="text-xs text-paper-500 mt-0.5">{cert.issuer}</p>
                       {cert.detail && (
-                        <p className="text-xs text-paper-500 mt-0.5">{cert.detail}</p>
+                        <p className="text-xs text-paper-700 mt-0.5">{cert.detail}</p>
                       )}
                     </div>
                   ))}

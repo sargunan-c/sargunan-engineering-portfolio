@@ -16,7 +16,7 @@ export default function AIArchitecture() {
         </Reveal>
         <Reveal delay={0.05}>
           <h2 className="text-4xl sm:text-5xl font-display font-semibold tracking-tight mb-4 max-w-2xl">
-            AI system architecture
+            How I build AI systems
           </h2>
         </Reveal>
         <Reveal delay={0.1}>
@@ -40,7 +40,6 @@ export default function AIArchitecture() {
                   key={node.id}
                   onClick={() => setSelectedId(node.id)}
                   onMouseEnter={() => setSelectedId(node.id)}
-                  onFocus={() => setSelectedId(node.id)}
                   className={`text-left px-4 py-3 rounded-xl border transition-all duration-300 ${
                     selectedId === node.id
                       ? 'border-cyan/40 bg-white/5'

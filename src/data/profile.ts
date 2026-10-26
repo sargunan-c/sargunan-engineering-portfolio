@@ -4,76 +4,107 @@
 
 export const profile = {
   name: 'Sargunan C',
-  title: 'Applied GenAI Engineer',
+  title: 'ECE Engineer | Embedded Firmware & AI Systems',
   location: 'Bengaluru, Karnataka, India',
   email: 'csargunan04@gmail.com',
   linkedin: 'https://www.linkedin.com/in/sargunanchandran',
-  github: 'https://github.com/Sargunan-1619',
-  resumeUrl: '/Sargunan-C-Resume.pdf',
+  github: 'https://github.com/sargunan-c',
+  resumeUrl: '/resumes/embedded-firmware-resume.pdf',
+  embeddedResumeUrl: '/resumes/embedded-firmware-resume.pdf',
+  aiResumeUrl: '/resumes/ai-software-resume.pdf',
 
   positioning:
-    'RAG & LLM Applications | AI Agents | AI Workflow Automation with n8n',
+    'Embedded Software & Firmware Validation | GenAI Applications & AI Systems',
 
   summary:
-    'Applied GenAI Engineer and recent B.Tech graduate building practical LLM applications, retrieval-augmented generation (RAG) pipelines, and AI-driven workflow automation. Experienced in integrating LLM APIs, vector search, and structured-output extraction into functioning end-to-end systems using n8n and Python. Focused on production-oriented AI engineering rather than isolated experimentation.',
+    'B.Tech Electronics and Communication Engineering graduate (2026) building modular embedded software, automated firmware validation systems, practical LLM/RAG applications, and end-to-end workflow automation. Experienced in C11 finite-state machines, black-box regression testing, vector search retrieval pipelines, and structured API extraction. Focused on deterministic system design, boundary-tested firmware validation, and production-oriented AI engineering.',
 
-  status: 'Available for AI Engineering Opportunities',
+  status: 'Available for Embedded Firmware & AI Opportunities',
 }
 
-export const skillGroups = [
+export interface SkillGroup {
+  id: string
+  label: string
+  emphasis: boolean
+  note?: string
+  items: readonly string[]
+}
+
+export const skillGroups: readonly SkillGroup[] = [
   {
-    id: 'genai',
-    label: 'Generative AI',
+    id: 'embedded-firmware',
+    label: 'Embedded C & Firmware',
     emphasis: true,
     items: [
-      'LLMs',
-      'Prompt Engineering',
-      'RAG',
-      'AI Agents',
-      'Embeddings',
-      'Vector Search',
-      'Semantic Search',
-      'Context Retrieval',
+      'C11',
+      'Modular C programming',
+      'Finite-state machines',
+      'Threshold handling',
+      'Fault detection and recovery',
+      'Error handling',
     ],
   },
   {
-    id: 'ai-engineering',
-    label: 'AI Engineering',
+    id: 'testing-validation',
+    label: 'Testing & Validation',
+    emphasis: true,
+    items: [
+      'Unit testing',
+      'Boundary-value testing',
+      'Automated test execution',
+      'Expected-versus-actual checks',
+      'Regression testing',
+      'Timeout and failure handling',
+      'JSON reporting',
+    ],
+  },
+  {
+    id: 'genai',
+    label: 'AI & GenAI',
     emphasis: true,
     items: [
       'LLM APIs',
-      'Retrieval Pipelines',
-      'Document Processing',
-      'Structured Outputs',
-      'JSON Validation',
-      'API Integration',
-      'AI Application Development',
+      'RAG',
+      'Embeddings',
+      'Vector and semantic search',
+      'Prompt engineering',
+      'Structured extraction',
+      'n8n automation',
     ],
   },
   {
-    id: 'ai-automation',
-    label: 'AI Automation',
-    emphasis: true,
+    id: 'embedded-fundamentals',
+    label: 'Embedded Fundamentals',
+    emphasis: false,
+    note: 'Conceptual / simulation-level knowledge',
     items: [
-      'n8n',
-      'Workflow Automation',
-      'Webhooks',
-      'Email / IMAP Automation',
-      'Google Sheets Integration',
-      'Workflow Orchestration',
+      'Microcontroller architecture',
+      'Registers and memory organization',
+      'GPIO',
+      'Timers and interrupts',
+      'ADC and PWM',
     ],
   },
   {
-    id: 'platforms',
-    label: 'AI Platforms & Tools',
+    id: 'communication-protocols',
+    label: 'Communication Protocols',
     emphasis: false,
-    items: ['OpenAI API', 'Groq', 'Google Gemini', 'Hugging Face'],
+    note: 'Conceptual / simulation-level knowledge',
+    items: ['UART', 'I2C', 'SPI'],
   },
   {
-    id: 'engineering',
-    label: 'Programming & Engineering',
+    id: 'software-tools',
+    label: 'Software & Tools',
     emphasis: false,
-    items: ['Python', 'JavaScript', 'TypeScript', 'SQL', 'REST APIs', 'Git', 'GitHub', 'VS Code'],
+    items: [
+      'Python',
+      'JavaScript',
+      'TypeScript',
+      'React',
+      'REST APIs',
+      'JSON',
+      'Git and GitHub',
+    ],
   },
 ] as const
 
@@ -85,6 +116,7 @@ type LiveDemo = string | 'self' | null
 
 export interface Project {
   id: string
+  track: 'embedded' | 'ai'
   index: string
   name: string
   tags: string[]
@@ -103,9 +135,65 @@ export interface Project {
 }
 
 export const projects: Project[] = [
+  // Track A: Embedded Systems & Firmware
+  {
+    id: 'sensor-fault-controller',
+    track: 'embedded',
+    index: '01',
+    name: 'Sensor Fault Controller',
+    tags: ['C11', 'WebAssembly', 'Embedded C', 'Unit Testing'],
+    tech: ['C11', 'WebAssembly', 'Embedded C', 'Unit Testing'],
+    problem:
+      'Safety-critical thermal systems require deterministic fault detection, strict memory constraints, and fail-safe latching to prevent catastrophic damage and relay chattering from erratic sensor readings.',
+    approach:
+      'Modular C11 sensor controller implementing NORMAL, WARNING, and FAULT states, temperature thresholds, sensor-error detection, latched over-temperature faults, and recovery logic.',
+    architecture:
+      'Decoupled architecture separating core FSM logic, hardware telemetry validation, and CLI/Wasm interfaces. State transitions execute in deterministic O(1) constant time with zero heap allocation.',
+    implementation:
+      'Implemented in freestanding ISO C11 with defensive telemetry validation (IEEE-754 NaN/Inf, disconnect flags, and -40°C to +150°C limits). Compiled natively and to freestanding WebAssembly (7.0 KB binary, 20-byte RAM footprint) for simulated browser-based verification.',
+    decisions:
+      'Enforced zero dynamic memory allocation (0B heap) to eliminate fragmentation risks in embedded runtimes. Built a thermal hysteresis safety latch requiring temperatures to drop below 75.0°C before resetting an over-temperature trip (≥ 80.0°C). Note: Uses simulated sensor inputs, not physical hardware testing.',
+    result:
+      'Verified with 31 / 31 passing native C unit and boundary test scenarios and 31 / 31 automated WebAssembly scenarios with simulated sensor inputs, running live with a freestanding browser console and deterministic process exit codes.',
+    screenshot: 'project-sensor-fault-screenshot.png',
+    screenshotAlt:
+      'WebAssembly verification console for C11 Sensor Fault Controller showing the FSM engine, temperature gauges, telemetry readout, and simulated sensor controls.',
+    pipeline: ['Simulated Input', 'Defensive Validation', 'FSM State Evaluation', 'Hysteresis Safety Latch', 'Control Output'],
+    liveDemo: 'https://sensor-fault-controller.vercel.app/',
+    github: 'https://github.com/sargunan-c/sensor-fault-controller',
+  },
+  {
+    id: 'firmware-validation-framework',
+    track: 'embedded',
+    index: '02',
+    name: 'Firmware Validation Framework',
+    tags: ['Python', 'C', 'Regression Testing', 'JSON Reporting'],
+    tech: ['Python', 'C', 'Regression Testing', 'JSON Reporting'],
+    problem:
+      'Firmware binaries require non-intrusive, automated black-box verification to guarantee deterministic behavior across operational boundaries, timeouts, and hardware fault conditions without modifying production C code.',
+    approach:
+      'Automated validation framework that executes a compiled C controller, checks expected versus actual results, handles timeouts, runs regression suites, and generates structured JSON reports.',
+    architecture:
+      'Decoupled validation pipeline: Web/CLI Runner → ValidationRunner → ControllerClient (isolated subprocess management with timeouts) → AssertionEngine (multi-domain comparison) → Standardized JSON Summary.',
+    implementation:
+      'Built using Python standard library without external dependencies. Spawns the compiled C binary as an isolated child process, captures telemetry via regex from stdout/stderr, and compares outputs across 5 verification dimensions.',
+    decisions:
+      'Maintained zero external Python dependencies to ensure seamless portability across host environments and CI/CD containers. Implemented strict subprocess timeouts to safeguard test pipelines against hung or unresponsive firmware binaries. Deployed according to cloud web architecture with mock-isolated telemetry execution.',
+    result:
+      'Automated regression testing successfully validating 37 / 37 controller test cases (100% pass rate, 0 failures) and 16 framework unit tests (including timeout handling) across normal, warning, fault, boundary, invalid input, and sensor error domains. Serves live interactive telemetry and machine-readable JSON reports.',
+    screenshot: 'project-firmware-validation-screenshot.png',
+    screenshotAlt:
+      'Firmware Validation Framework interactive console showing real-time test execution statistics (37/37 passed, 100% pass rate), subprocess telemetry console, and test results.',
+    pipeline: ['Test Scenarios', 'Subprocess Execution', 'C Controller Binary', 'Assertion Engine', 'JSON Report'],
+    liveDemo: 'https://firmware-validation-framework.onrender.com/',
+    github: 'https://github.com/sargunan-c/firmware-validation-framework',
+  },
+
+  // Track B: AI & Software Engineering
   {
     id: 'rag-assistant',
-    index: '01',
+    track: 'ai',
+    index: '03',
     name: 'RAG-Powered Component Specification Assistant',
     tags: ['RAG', 'LLM', 'Embeddings', 'Vector Search', 'n8n'],
     tech: ['n8n', 'Groq', 'Qdrant', 'Hugging Face Embeddings'],
@@ -126,11 +214,12 @@ export const projects: Project[] = [
       'n8n workflow canvas showing the RAG-Powered Component Specification Assistant: a chat trigger connected to a Component Spec RAG Agent using a Groq Chat Model and a Qdrant search tool, alongside a document ingestion pipeline with PDF extraction, text splitting, Hugging Face embeddings, and Qdrant insert.',
     pipeline: ['Documents', 'Embeddings', 'Vector Search', 'RAG', 'LLM', 'Response'],
     liveDemo: null,
-    github: 'https://github.com/Sargunan-1619',
+    github: 'https://github.com/sargunan-c/rag-component-specification-assistant',
   },
   {
     id: 'rfq-parser',
-    index: '02',
+    track: 'ai',
+    index: '04',
     name: 'AI-Powered Supply Chain RFQ & Email Parser',
     tags: ['LLM', 'n8n', 'Groq', 'IMAP', 'JSON', 'Google Sheets'],
     tech: ['n8n', 'Groq', 'IMAP', 'Google Sheets API'],
@@ -151,18 +240,19 @@ export const projects: Project[] = [
       'n8n workflow canvas showing the Supply Chain RFQ & Email Parser: an IMAP email trigger connected to a Basic LLM Chain using a Groq Chat Model, followed by a Parse & Validate JSON node and a Log to Google Sheet node.',
     pipeline: ['Incoming Email', 'LLM Extraction', 'Structured JSON', 'Validation', 'Google Sheets'],
     liveDemo: null,
-    github: 'https://github.com/Sargunan-1619',
+    github: 'https://github.com/sargunan-c/ai-supply-chain-rfq-email-parser',
   },
   {
     id: 'portfolio',
-    index: '03',
+    track: 'ai',
+    index: '05',
     name: '3D AI Engineer Personal Portfolio',
     tags: ['React', 'TypeScript', 'Three.js / React Three Fiber', 'Framer Motion'],
     tech: ['React', 'TypeScript', 'React Three Fiber', 'Framer Motion', 'Tailwind CSS'],
     problem:
-      'A static resume page does not communicate how an AI engineer actually thinks about systems — pipelines, retrieval, orchestration.',
+      'A static resume page does not communicate how an AI and systems engineer actually thinks about pipelines, retrieval, orchestration, and interactive tooling.',
     approach:
-      'Designed and built an interactive 3D personal portfolio using React, TypeScript, and React Three Fiber to present GenAI projects with an immersive, responsive interface.',
+      'Designed and built an interactive 3D personal portfolio using React, TypeScript, and React Three Fiber to present engineering projects with an immersive, responsive interface.',
     architecture:
       'Component-based architecture separating 3D scenes, content sections, and shared data, with scroll-linked state driving which part of the 3D system is highlighted.',
     implementation:
@@ -170,26 +260,42 @@ export const projects: Project[] = [
     decisions:
       'Kept the 3D scene to one reused system rather than a different 3D element per section, to avoid decoration for its own sake and keep performance predictable on lower-end devices.',
     result:
-      'An interactive engineering portfolio designed to present GenAI systems, technical architecture, and workflow automation through a performance-conscious 3D interface.',
+      'An interactive engineering portfolio presenting both Embedded Firmware and Applied GenAI systems through a performance-conscious, dark-mode 3D interface.',
     screenshot: null,
     screenshotAlt: null,
     pipeline: [],
     liveDemo: 'self',
-    github: 'https://github.com/Sargunan-1619',
+    github: 'https://github.com/sargunan-c/sargunan-genai-portfolio',
   },
 ]
 
 export const timeline = [
   {
+    id: 'innerwhispers',
+    kind: 'Experience',
+    title: 'AI & Automation Intern',
+    org: 'InnerWhispers',
+    location: 'Remote',
+    period: 'Aug 2026 – Oct 2026',
+    points: [
+      'Contributing to AI and automation initiatives, supporting assigned product and development workflows.',
+      'Supporting front-end and software development tasks across ongoing projects using web and AI technologies.',
+      'Applying AI frameworks and automation tools to assigned development requirements.',
+      'Participating in development, testing, debugging, and project reviews to improve assigned solutions.',
+    ],
+  },
+  {
     id: 'bsnl',
     kind: 'Experience',
-    title: 'Telecom Infrastructure Intern',
+    title: 'Industrial Training',
     org: 'Bharat Sanchar Nigam Limited (BSNL)',
     location: 'Chennai, India',
-    period: 'June 2025',
+    period: 'Jun – Jul 2025',
     points: [
-      'Assisted with broadband and optical fiber infrastructure operations, gaining hands-on exposure to network architecture and real-time configuration in a live telecommunications environment.',
-      'Supported monitoring of network infrastructure components as part of day-to-day operations during the internship period.',
+      'Gained hands-on exposure to optical-fibre communication, OTDR testing, and high-speed network transmission systems.',
+      'Studied broadband infrastructure, FTTH (Fiber to the Home) architecture, and telecommunications exchange equipment operations.',
+      'Observed digital switching systems, telephone exchange routing, and live network monitoring procedures.',
+      'Learned structured cable distribution, ODF/MDF wiring protocols, and preventative telecom maintenance practices.',
     ],
   },
   {
@@ -199,7 +305,9 @@ export const timeline = [
     org: 'SASTRA Deemed University',
     location: null,
     period: '2022 – 2026',
-    points: [],
+    points: [
+      'Core coursework and laboratory exposure in embedded systems, microcontrollers, digital signal processing, communication networks, and software development.',
+    ],
   },
 ] as const
 
@@ -211,7 +319,7 @@ export const certifications = [
   },
   {
     name: 'AI and Neural Networks',
-    issuer: 'SASTRA University',
+    issuer: 'SASTRA Deemed University',
     detail: null,
   },
 ] as const

@@ -41,7 +41,7 @@ export default function Hero() {
             transition={{ duration: 0.6 }}
             className="section-eyebrow mb-6"
           >
-            Applied GenAI Engineer
+            ECE Engineer | Embedded Firmware & AI Systems
           </motion.p>
 
           <motion.h1
@@ -57,19 +57,9 @@ export default function Hero() {
             initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
             animate={loaded ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.25 }}
-            className="text-lg sm:text-xl text-paper-300 leading-relaxed mb-5 max-w-xl"
+            className="text-lg sm:text-xl text-paper-300 leading-relaxed mb-10 max-w-xl"
           >
-            I build practical AI systems with LLMs, RAG, AI agents, and
-            workflow automation.
-          </motion.p>
-
-          <motion.p
-            initial={prefersReducedMotion ? false : { opacity: 0, y: 16 }}
-            animate={loaded ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.32 }}
-            className="font-mono text-xs sm:text-sm tracking-wide text-cyan/80 mb-10"
-          >
-            RAG · LLM Applications · AI Agents · n8n Automation
+            Building embedded software, automated firmware validation systems, and practical AI-powered applications.
           </motion.p>
 
           <motion.div

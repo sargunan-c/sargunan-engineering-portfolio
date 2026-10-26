@@ -29,13 +29,12 @@ export default function Contact() {
             </Reveal>
             <Reveal delay={0.05}>
               <h2 className="text-4xl sm:text-5xl lg:text-6xl font-display font-semibold tracking-tight leading-[1.05] mb-6">
-                Let's build something intelligent.
+                Let's build reliable systems.
               </h2>
             </Reveal>
             <Reveal delay={0.1}>
               <p className="text-lg text-paper-300 leading-relaxed mb-10 max-w-md">
-                Have an AI product, workflow, or automation problem? Let's
-                turn it into a working system.
+                Have an embedded firmware, automated validation, or generative AI opportunity? Let's connect.
               </p>
             </Reveal>
 
@@ -123,7 +122,7 @@ export default function Contact() {
               >
                 {status === 'sent' ? 'Opening your email app…' : 'Send Message'}
               </button>
-              <p className="text-xs text-paper-500 text-center">
+              <p className="text-xs text-paper-700 text-center">
                 Opens your email app with this message pre-filled.
               </p>
             </form>

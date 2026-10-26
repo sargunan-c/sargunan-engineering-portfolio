@@ -118,7 +118,7 @@ export default function Navigation({ activeId }: NavigationProps) {
               ))}
               <div className="flex items-center gap-2 px-4 py-3 font-mono text-xs text-paper-500">
                 <span className="w-1.5 h-1.5 rounded-full bg-cyan animate-pulse-slow" />
-                Available for AI Engineering Opportunities
+                {profile.status}
               </div>
             </nav>
           </motion.div>
